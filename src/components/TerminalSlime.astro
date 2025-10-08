@@ -5,28 +5,27 @@ const { lang = "es", labels = {} } = Astro.props;
 
 <div id="terminal-slime" class="terminal-slime">
   <img src="/Slime_Player.png" alt={labels.slime?.alt || "Slime mascot"} class="slime-image" />
-  <div class="slime-tooltip" id="slime-tooltip">
-    <div class="tooltip-content">
-      <strong>{labels.slime?.greeting || "HELLO!"}</strong><br>
-      <span set:html={labels.slime?.message || "Looks like you like slimes<br>soon you'll have more wait for it..."}></span>
-    </div>
+</div>
+
+<!-- Diálogo separado fuera del contenedor del slime -->
+<div class="slime-dialog" id="slime-dialog">
+  <div class="dialog-content">
+    <strong>{labels.slime?.greeting || "HELLO!"}</strong><br>
+    <span set:html={labels.slime?.message || "Looks like you like slimes<br>soon you'll have more wait for it..."}></span>
   </div>
 </div>
 
 <script is:raw>
   function initTerminalSlime() {
     const slime = document.getElementById('terminal-slime');
-    const tooltip = document.getElementById('slime-tooltip');
-    if (!slime || !tooltip) return;
+    const dialog = document.getElementById('slime-dialog');
+    if (!slime || !dialog) return;
 
-    // Inicializar tooltip como oculto
-    tooltip.style.display = 'none';
-    tooltip.style.opacity = '0';
+    // Asegurar que el diálogo esté oculto inicialmente
+    dialog.style.display = 'none';
     
-    console.log('Tooltip encontrado:', tooltip);
-    console.log('Tooltip text:', tooltip.textContent);
-    console.log('Tooltip display:', tooltip.style.display);
-    console.log('Tooltip opacity:', tooltip.style.opacity);
+    console.log('Dialog encontrado:', dialog);
+    console.log('Dialog text:', dialog.textContent);
 
     // Obtener solo la sección "about"
     const aboutSection = document.querySelector('#about');
@@ -96,23 +95,64 @@ const { lang = "es", labels = {} } = Astro.props;
     slime.style.transform = 'translateY(-20px)';
 
     // Event listeners
-    window.addEventListener('scroll', updateSlimeVisibility);
-    window.addEventListener('resize', updateSlimeVisibility);
-    
-    // Event listeners para el tooltip
-    slime.addEventListener('mouseenter', () => {
-      tooltip.style.display = 'block';
-      tooltip.style.opacity = '1';
-      tooltip.style.visibility = 'visible';
-      console.log('Hover iniciado - tooltip visible');
+    window.addEventListener('scroll', () => {
+      updateSlimeVisibility();
+      // Reposicionar el diálogo si está visible
+      if (dialog.style.display === 'block') {
+        positionDialog();
+      }
+    });
+    window.addEventListener('resize', () => {
+      updateSlimeVisibility();
+      // Reposicionar el diálogo si está visible
+      if (dialog.style.display === 'block') {
+        positionDialog();
+      }
     });
     
-    slime.addEventListener('mouseleave', () => {
-      tooltip.style.display = 'none';
-      tooltip.style.opacity = '0';
-      tooltip.style.visibility = 'hidden';
-      console.log('Hover terminado - tooltip oculto');
-    });
+  // Función para posicionar el diálogo sobre el slime
+  function positionDialog() {
+    const slimeRect = slime.getBoundingClientRect();
+    const dialogWidth = 200; // max-width del diálogo
+    const dialogHeight = 140; // altura estimada
+    
+    // Posicionar el diálogo arriba del slime
+    dialog.style.position = 'fixed';
+    dialog.style.left = `${slimeRect.left + (slimeRect.width / 2) - (dialogWidth / 2)}px`;
+    dialog.style.top = `${slimeRect.top - dialogHeight - 20}px`;
+    dialog.style.zIndex = '99999';
+  }
+
+  // Event listeners para el diálogo - versión simplificada
+  slime.addEventListener('mouseenter', () => {
+    console.log('Hover iniciado');
+    positionDialog();
+    dialog.style.display = 'block';
+    dialog.style.opacity = '1';
+    dialog.style.visibility = 'visible';
+  });
+  
+  slime.addEventListener('mouseleave', () => {
+    console.log('Hover terminado');
+    dialog.style.display = 'none';
+    dialog.style.opacity = '0';
+    dialog.style.visibility = 'hidden';
+  });
+
+  // Evento de click para probar que funciona
+  slime.addEventListener('click', () => {
+    console.log('Click en slime');
+    positionDialog();
+    if (dialog.style.display === 'none') {
+      dialog.style.display = 'block';
+      dialog.style.opacity = '1';
+      dialog.style.visibility = 'visible';
+    } else {
+      dialog.style.display = 'none';
+      dialog.style.opacity = '0';
+      dialog.style.visibility = 'hidden';
+    }
+  });
     
     // Inicializar posición
     updateSlimeVisibility();
@@ -261,87 +301,49 @@ const { lang = "es", labels = {} } = Astro.props;
     z-index: -1;
   }
 
-  /* Tooltip del slime */
-  .slime-tooltip {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+  /* Diálogo del slime */
+  .slime-dialog {
+    position: fixed;
     background: #ffffff;
     color: #000000;
-    padding: 16px 20px;
+    padding: 12px 16px;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 14px;
     font-family: 'Courier New', monospace;
     text-align: center;
     line-height: 1.4;
-    border: 4px solid #000000;
-    box-shadow: 4px 4px 0px #000000, 8px 8px 0px #666666;
+    border: 3px solid #000000;
+    box-shadow: 2px 2px 0px #000000;
     z-index: 99999;
     pointer-events: none;
-    margin-bottom: 15px;
-    max-width: 250px;
+    max-width: 200px;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
   }
 
-  .tooltip-content {
+  .dialog-content {
     display: block;
   }
 
-  .slime-tooltip::after {
+  .slime-dialog::after {
     content: '';
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border: 10px solid transparent;
+    border: 8px solid transparent;
     border-top-color: #ffffff;
   }
 
-  .slime-tooltip::before {
+  .slime-dialog::before {
     content: '';
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border: 14px solid transparent;
+    border: 11px solid transparent;
     border-top-color: #000000;
-    margin-top: 4px;
-  }
-
-  /* Animación retro de videojuego */
-  .terminal-slime:hover .slime-tooltip {
-    animation: retroBlink 0.5s ease-in-out;
-  }
-
-  @keyframes retroBlink {
-    0%, 100% {
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
-    }
-    25% {
-      opacity: 0.8;
-      transform: translateX(-50%) scale(1.02);
-    }
-    50% {
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
-    }
-    75% {
-      opacity: 0.9;
-      transform: translateX(-50%) scale(0.98);
-    }
-  }
-
-  /* Hover controlado por JavaScript */
-
-  @keyframes tooltipPulse {
-    0%, 100% {
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      border-color: rgba(6, 182, 212, 0.4);
-    }
-    50% {
-      box-shadow: 0 8px 20px rgba(6, 182, 212, 0.2), 0 0 20px rgba(6, 182, 212, 0.1);
-      border-color: rgba(6, 182, 212, 0.6);
-    }
+    margin-top: 3px;
   }
 </style>
