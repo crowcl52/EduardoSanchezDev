@@ -1,0 +1,321 @@
+---
+const { lang = "es", labels = {} } = Astro.props;
+const items = [
+  { name: "React", icon: "/src/icons/react.svg", fallback: "⚛️", color: "#61DAFB" },
+  { name: "React Native", icon: "/src/icons/reactnative.svg", fallback: "📱", color: "#61DAFB" },
+  { name: "TypeScript", icon: "/src/icons/ts.svg", fallback: "🔷", color: "#3178C6" },
+  { name: "JavaScript", icon: "/src/icons/js.svg", fallback: "🟨", color: "#F7DF1E" },
+  { name: "Node.js", icon: "/src/icons/node.svg", fallback: "🟢", color: "#339933" },
+  { name: "Angular", icon: "/src/icons/angular.svg", fallback: "🔺", color: "#DD0031" },
+  { name: "HTML5", icon: "/src/icons/html.svg", fallback: "🌐", color: "#E34F26" },
+  { name: "CSS3", icon: "/src/icons/css.svg", fallback: "💎", color: "#1572B6" },
+  { name: "Git", icon: "/src/icons/git.svg", fallback: "📝", color: "#F05032" },
+  { name: "MySQL", icon: "/src/icons/mysql.svg", fallback: "🗄️", color: "#4479A1" },
+  { name: "Python", icon: "/src/icons/py.svg", fallback: "🐍", color: "#3776AB" },
+  { name: "Astro", icon: "/src/icons/astro.svg", fallback: "🚀", color: "#FF5D01" }
+];
+---
+
+<!-- Terminal Header -->
+<div class="bg-black/80 border border-cyan-400/30 rounded-t-lg p-3 mb-0">
+  <div class="flex items-center gap-2">
+    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+    <span class="ml-4 text-cyan-400 text-sm font-mono">eduardo@dev:~$ {labels.terminal?.commands?.lsSkills || "ls skills/"}</span>
+  </div>
+</div>
+
+<!-- Terminal Content -->
+<div class="bg-black/90 border-x border-b border-cyan-400/30 p-8">
+  <div class="embla overflow-hidden">
+    <div class="embla__viewport">
+      <div class="embla__container">
+        {items.map((t, index) => (
+          <div class="embla__slide flex-shrink-0">
+            <div class="border border-cyan-400/20 rounded p-4 bg-black/50 hover:border-cyan-300/50 transition-all hover:bg-cyan-500/10 min-h-[120px]">
+              <div class="flex flex-col items-center text-center space-y-3">
+                <div class="w-12 h-12 grid place-items-center border border-cyan-400/30 rounded-lg bg-cyan-500/10 relative">
+                  <img src={t.icon} alt={t.name} class="tech-icon" style={`color: ${t.color};`} width="28" height="28" />
+                  <span class="absolute text-lg fallback-icon" style="display: none;">{t.fallback}</span>
+                </div>
+                <div class="font-mono">
+                  <div class="text-cyan-400 font-medium text-sm">{t.name}</div>
+                  <div class="text-green-400 text-xs">{labels.tech?.productionReady || "production-ready"}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+  
+  <!-- Terminal Footer -->
+  <div class="mt-6 pt-4 border-t border-cyan-400/20">
+    <p class="text-green-400 text-sm font-mono">
+      <span class="text-cyan-400">$</span> {labels.terminal?.commands?.echoTotal?.replace('{count}', items.length) || `echo "Total: ${items.length} technologies mastered"`}
+    </p>
+  </div>
+</div>
+<script>
+  // Carousel simple sin dependencias externas
+  function initSimpleCarousel() {
+    const container = document.querySelector('.embla__container');
+    const viewport = document.querySelector('.embla__viewport');
+    
+    if (!container || !viewport) return;
+    
+    let currentIndex = 0;
+    let isAnimating = false;
+    let autoplayInterval: NodeJS.Timeout | null = null;
+    const slides = container.querySelectorAll('.embla__slide');
+    const totalSlides = slides.length;
+    
+    if (totalSlides === 0) return;
+    
+    // Función para mover el carousel con transición infinita
+    function moveCarousel(index: number, smooth = true) {
+      if (isAnimating || !container) return;
+      isAnimating = true;
+      
+      currentIndex = index;
+      const slideWidth = 250 + 24; // 250px width + 24px gap
+      const translateX = -index * slideWidth;
+      
+      if (smooth) {
+        (container as HTMLElement).style.transition = 'transform 0.4s ease-in-out';
+      } else {
+        (container as HTMLElement).style.transition = 'none';
+      }
+      
+      (container as HTMLElement).style.transform = `translateX(${translateX}px)`;
+      
+      setTimeout(() => {
+        isAnimating = false;
+      }, smooth ? 400 : 0);
+    }
+    
+    // Autoplay infinito más rápido
+    function startAutoplay() {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+      
+      autoplayInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        moveCarousel(currentIndex);
+      }, 1800); // Más rápido: 1.8 segundos
+    }
+    
+    // Función para pausar autoplay
+    function pauseAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+    }
+    
+    // Función para reanudar autoplay
+    function resumeAutoplay() {
+      if (!autoplayInterval) {
+        startAutoplay();
+      }
+    }
+    
+    // Navegación con teclado
+    viewport.addEventListener('keydown', (e) => {
+      const event = e as KeyboardEvent;
+      if (event.key === 'ArrowLeft') {
+        pauseAutoplay();
+        currentIndex = currentIndex > 0 ? currentIndex - 1 : totalSlides - 1;
+        moveCarousel(currentIndex);
+        setTimeout(resumeAutoplay, 3000); // Reanudar después de 3 segundos
+      }
+      if (event.key === 'ArrowRight') {
+        pauseAutoplay();
+        currentIndex = (currentIndex + 1) % totalSlides;
+        moveCarousel(currentIndex);
+        setTimeout(resumeAutoplay, 3000); // Reanudar después de 3 segundos
+      }
+    });
+    
+    // Pausar autoplay al hacer hover
+    viewport.addEventListener('mouseenter', pauseAutoplay);
+    viewport.addEventListener('mouseleave', resumeAutoplay);
+    
+    // Pausar autoplay al hacer click
+    viewport.addEventListener('click', () => {
+      pauseAutoplay();
+      setTimeout(resumeAutoplay, 5000); // Reanudar después de 5 segundos
+    });
+    
+    // Hacer focusable para navegación con teclado
+    viewport.setAttribute('tabindex', '0');
+    
+    // Iniciar autoplay
+    startAutoplay();
+    
+    console.log('Carousel infinito inicializado');
+  }
+
+  // Verificar si los iconos se cargan correctamente
+  function checkIcons() {
+    const iconElements = document.querySelectorAll('.tech-icon');
+    console.log(`Verificando ${iconElements.length} iconos...`);
+    
+    iconElements.forEach((icon, index) => {
+      const htmlIcon = icon as HTMLImageElement;
+      const fallback = icon.parentElement?.querySelector('.fallback-icon') as HTMLElement;
+      
+      // Verificar si la imagen se cargó correctamente
+      setTimeout(() => {
+        const isLoaded = htmlIcon.complete && htmlIcon.naturalHeight !== 0;
+        const hasError = htmlIcon.naturalHeight === 0;
+        
+        console.log(`Icono ${index}: loaded=${isLoaded}, error=${hasError}`);
+        
+        if (hasError || !isLoaded) {
+          console.log(`Mostrando fallback para icono ${index}`);
+          if (fallback) {
+            htmlIcon.style.display = 'none';
+            fallback.style.display = 'block';
+          }
+        } else {
+          console.log(`Icono ${index} cargado correctamente`);
+        }
+      }, 500);
+    });
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initSimpleCarousel();
+      checkIcons();
+    });
+  } else {
+    setTimeout(() => {
+      initSimpleCarousel();
+      checkIcons();
+    }, 500);
+  }
+</script>
+
+<style>
+.embla__viewport { 
+  overflow: hidden; 
+  cursor: grab;
+}
+
+.embla__viewport:active {
+  cursor: grabbing;
+}
+
+.embla__container { 
+  display: flex; 
+  will-change: transform;
+  gap: 1.5rem;
+  padding: 0 1rem;
+  transition: transform 0.4s ease-in-out;
+}
+
+.embla__slide { 
+  flex: 0 0 250px;
+  max-width: 250px;
+  min-width: 250px;
+}
+
+/* Responsive */
+@media (max-width: 640px) { 
+  .embla__container {
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+  .embla__slide { 
+    flex: 0 0 200px;
+    max-width: 200px;
+    min-width: 200px;
+  } 
+}
+
+@media (min-width: 768px) { 
+  .embla__slide { 
+    flex: 0 0 230px;
+    max-width: 230px;
+    min-width: 230px;
+  } 
+}
+
+@media (min-width: 1024px) { 
+  .embla__container {
+    gap: 2rem;
+  }
+  .embla__slide { 
+    flex: 0 0 250px;
+    max-width: 250px;
+    min-width: 250px;
+  } 
+}
+
+/* Hover effects */
+.embla__slide:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+/* Prevent overlap and ensure proper spacing */
+.embla__slide {
+  box-sizing: border-box;
+  position: relative;
+}
+
+.embla__slide > div {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure proper container width */
+.embla {
+  width: 100%;
+  position: relative;
+}
+
+/* Icon styles */
+.tech-icon {
+  transition: all 0.3s ease;
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgba(6, 182, 212, 0.3));
+}
+
+.fallback-icon {
+  transition: all 0.3s ease;
+  font-size: 1.5rem;
+  display: none;
+}
+
+/* Ensure fallback icons are properly styled when shown */
+.fallback-icon[style*="block"] {
+  display: block !important;
+}
+
+/* Icon container styling */
+.embla__slide .w-12.h-12 {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Icon hover states */
+.tech-icon:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.5));
+}
+
+/* Ensure proper icon sizing */
+.tech-icon {
+  max-width: 100%;
+  max-height: 100%;
+}
+</style>

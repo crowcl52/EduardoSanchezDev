@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+const { lang = "es", labels = {} } = Astro.props;
+const exp = (await getCollection("experience"))
+  .sort((a,b)=> (a.data.from > b.data.from ? -1 : 1));
+---
+<section id="about" class="py-16">
+  <h2 class="glitch text-3xl font-semibold mb-6" data-text={labels.experience?.trajectory || "Trayectoria"}>{labels.experience?.trajectory || "Trayectoria"}</h2>
+  <ol class="relative border-s border-cyan-400/20">
+    {exp.map(({ data }) => (
+      <li class="ms-6 mb-8">
+        <span class="absolute -start-2 top-1 w-3 h-3 rounded-full bg-tron-cyan shadow-neon"></span>
+        <h3 class="font-semibold">{data.role} · {data.company}</h3>
+        <p class="text-xs text-slate-400">{data.from} – {data.to ?? "Actual"}</p>
+        <ul class="mt-2 list-disc ms-5 text-slate-300">
+          {data.highlights.map(h => <li>{h}</li>)}
+        </ul>
+        {data.stack?.length && <p class="mt-2 text-xs text-slate-400">Stack: {data.stack.join(", ")}</p>}
+      </li>
+    ))}
+  </ol>
+</section>

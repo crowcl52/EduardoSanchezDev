@@ -1,0 +1,596 @@
+---
+// Datos de experiencia profesional completa
+const experiences = [
+  {
+    id: "reece",
+    title: "Front-end Developer",
+    company: "Reece",
+    location: "CDMX",
+    period: "Ene 2022 - Actual",
+    duration: "3+ años",
+    status: "current",
+    details: {
+      description: "Desarrollador frontend especializado en React y React Native, enfocado en desarrollo de aplicaciones web, mantenimiento de sistemas internos y creación de nuevas aplicaciones.",
+      technologies: ["React", "React Native", "TypeScript", "JavaScript", "HTML", "CSS", "Node.js", "Git"],
+      achievements: [
+        "Completar desarrollo de e-commerce completo en solo 3 meses",
+        "Desarrollo de aplicaciones web modernas y responsivas",
+        "Mantenimiento y mejora de aplicaciones web internas",
+        "Creación de nuevas aplicaciones desde cero",
+        "Implementación de mejores prácticas de desarrollo",
+        "Optimización de rendimiento en aplicaciones existentes"
+      ],
+      methodologies: ["Metodología Ágil", "Desarrollo Iterativo"]
+    }
+  },
+  {
+    id: "softtek",
+    title: "Programador Expert",
+    company: "Softtek",
+    location: "CDMX",
+    period: "Sep 2020 - Dic 2021",
+    duration: "1 año 4 meses",
+    status: "completed",
+    details: {
+      description: "Desarrollador frontend experto en proyectos internos y externos, especializado en Angular y desarrollo de aplicaciones empresariales complejas.",
+      technologies: ["Angular 9-10", "TypeScript", "JavaScript", "Java", "CSS", "Angular Material", "Git", "TFS"],
+      achievements: [
+        "Desarrollo de MVP en 1 semana y versión 1 en 1 mes",
+        "Creación de modal con calendario personalizado reutilizable",
+        "Ajuste de Angular Material para sistemas corporativos",
+        "Servicio de reportes para generar archivos Excel desde frontend",
+        "Desarrollo de lector de códigos QR para aplicaciones web",
+        "Aplicaciones responsivas para PC y tabletas"
+      ],
+      methodologies: ["Metodología Ágil", "Scrum", "Jira"]
+    }
+  },
+  {
+    id: "mind-help",
+    title: "Front-End SR.",
+    company: "Mind Help",
+    location: "Guadalajara",
+    period: "Oct 2019 - Ago 2020",
+    duration: "11 meses",
+    status: "completed",
+    details: {
+      description: "Desarrollador frontend senior y líder de equipo en startup de salud mental, refactorizando aplicaciones móviles y desarrollando sistemas desde cero.",
+      technologies: ["Angular 8", "TypeScript", "JavaScript", "Node.js", "Ionic 2", "GitHub", "Atlassian"],
+      achievements: [
+        "Terminación de 2 aplicaciones en 5 meses con equipo pequeño",
+        "Refactorización completa del sistema con mejores prácticas",
+        "Desarrollo de webs para usuarios y doctores desde cero",
+        "Gestión de equipo junto con Scrum Master",
+        "Startup dentro de las 100 más valiosas del 2020"
+      ],
+      methodologies: ["Metodología Ágil"]
+    }
+  },
+  {
+    id: "hp-inc",
+    title: "Programador",
+    company: "HP Inc",
+    location: "Guadalajara",
+    period: "May 2018 - Ene 2020",
+    duration: "1 año 9 meses",
+    status: "completed",
+    details: {
+      description: "Desarrollador frontend principal en HP Inc, trabajando con Angular y liderando equipos para el desarrollo de aplicaciones internas.",
+      technologies: ["Angular 4-6", "TypeScript", "JavaScript", "C#", "Jira", "Atlassian"],
+      achievements: [
+        "Desarrollo de aplicaciones en menos de 1 mes",
+        "Ayuda al área para obtener premio por mejor aplicación",
+        "Programación y gestión independiente de web",
+        "Dirección de equipo para aplicación de uso interno",
+        "Refactorización de aplicaciones internas con Angular 5-6"
+      ],
+      methodologies: ["Metodología Ágil", "Scrum"]
+    }
+  },
+  {
+    id: "aori",
+    title: "Programador",
+    company: "AORI",
+    location: "Guadalajara",
+    period: "Ene 2017 - May 2018",
+    duration: "1 año 5 meses",
+    status: "completed",
+    details: {
+      description: "Desarrollador full-stack especializado en aplicaciones web tipo Uber/DiDi y aplicaciones móviles híbridas, evolucionando hasta líder de equipo.",
+      technologies: ["Angular 2", "Ionic 2", "React", "TypeScript", "PHP", "Laravel", "Git Bucket"],
+      achievements: [
+        "Dirigir equipo para lanzamiento de aplicación en 5 meses",
+        "Desarrollo de aplicaciones tipo Uber/DiDi y de apuestas",
+        "Creación de landing pages y portafolios médicos",
+        "Desarrollo de aplicaciones móviles híbridas con React Native e Ionic 2",
+        "Liderazgo de equipo con levantamiento de requerimientos y gestión de cliente"
+      ],
+      methodologies: ["Desarrollo Ágil"]
+    }
+  },
+  {
+    id: "freelance",
+    title: "Programador Freelance",
+    company: "Freelance",
+    location: "Guadalajara",
+    period: "2016 - 2021",
+    duration: "5 años",
+    status: "completed",
+    details: {
+      description: "Desarrollador freelance especializado en proyectos diversos, desde landing pages hasta e-commerce y sistemas completos con backend y frontend.",
+      technologies: ["HTML", "CSS", "JavaScript", "Angular JS", "Angular 2-12", "React", "React Native", "Ionic", "PHP", "Python Flask", "WordPress"],
+      achievements: [
+        "Desarrollo exitoso de 3 e-commerce con WordPress",
+        "Sistemas backend y frontend con PHP y Angular JS",
+        "Proyectos con clientes de Estados Unidos usando React",
+        "Mantenimiento y soporte para equipos pequeños",
+        "Completar todos los contratos de forma satisfactoria"
+      ],
+      methodologies: ["Desarrollo Independiente"]
+    }
+  },
+  {
+    id: "bis-soluciones",
+    title: "Programador Jr.",
+    company: "BIS Soluciones",
+    location: "CDMX",
+    period: "Ene 2015 - May 2015",
+    duration: "5 meses",
+    status: "completed",
+    details: {
+      description: "Desarrollador junior enfocado en desarrollo de pruebas de concepto y demos para aplicaciones internas de la empresa.",
+      technologies: ["Ionic 1", "JavaScript"],
+      achievements: [
+        "Desarrollo de pruebas de concepto para demos internos",
+        "Creación de aplicaciones demo con Ionic 1",
+        "Demostración de capacidades del framework Ionic"
+      ],
+      methodologies: ["Desarrollo de Prototipos"]
+    }
+  }
+];
+---
+
+<section id="experience" class="py-16">
+  <div class="max-w-4xl mx-auto">
+    <!-- Terminal Header -->
+    <div class="bg-black/80 border border-cyan-400/30 rounded-t-lg p-3 mb-0">
+      <div class="flex items-center gap-2">
+        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        <span class="ml-4 text-cyan-400 text-sm font-mono">eduardo@dev:~$ cat experience.txt</span>
+      </div>
+    </div>
+    
+    <!-- Terminal Content -->
+    <div class="bg-black/90 border-x border-b border-cyan-400/30 p-8">
+      <div class="font-mono text-green-400 space-y-4">
+        <p><span class="text-cyan-400">$</span> ls -la experience/</p>
+        
+        <!-- Lista de experiencias -->
+        <div class="space-y-3 mt-6">
+          {experiences.map((exp, index) => (
+            <div class="experience-item border border-cyan-400/20 rounded p-4 bg-black/50 hover:border-cyan-300/50 transition-all cursor-pointer group" data-exp-id={exp.id}>
+              <div class="flex items-center justify-between">
+                <div class="flex-1">
+                  <div class="flex items-center gap-4">
+                    <div class="text-cyan-400 font-bold text-lg">{exp.title}</div>
+                    <div class="text-slate-300">@ {exp.company}</div>
+                    <div class={`px-2 py-1 rounded text-xs font-bold ${
+                      exp.status === 'current' 
+                        ? 'bg-green-500/20 text-green-400 border border-green-400/30' 
+                        : 'bg-slate-500/20 text-slate-400 border border-slate-400/30'
+                    }`}>
+                      {exp.status === 'current' ? 'ACTIVO' : 'COMPLETADO'}
+                    </div>
+                  </div>
+                  <div class="text-slate-400 text-sm mt-1">
+                    <span class="text-cyan-400">{exp.period}</span> • <span class="text-yellow-400">{exp.duration}</span> • <span class="text-blue-400">{exp.location}</span>
+                  </div>
+                </div>
+                <div class="text-cyan-400 group-hover:text-cyan-300 transition-colors">
+                  <iconify-icon icon="mdi:chevron-right" width="20" height="20" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <!-- Modal Terminal (inicialmente oculto) -->
+        <div id="experience-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+          <div class="bg-black/95 border border-cyan-400/30 rounded-lg shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+            <!-- Terminal Header -->
+            <div class="bg-black/80 border-b border-cyan-400/30 p-3 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span class="ml-4 text-cyan-400 text-sm font-mono" id="modal-title">eduardo@dev:~$ cat experience.txt</span>
+              </div>
+              <button id="close-modal" class="text-red-400 hover:text-red-300 transition-colors p-1">
+                <iconify-icon icon="mdi:close" width="20" height="20"></iconify-icon>
+              </button>
+            </div>
+            
+            <!-- Terminal Content -->
+            <div class="bg-black/90 p-6 font-mono text-green-400 overflow-y-auto max-h-[calc(90vh-80px)]">
+              <div id="modal-content" class="space-y-4">
+                <!-- Contenido dinámico -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Datos de experiencia profesional completa
+  const experiences = [
+    {
+      id: "reece",
+      title: "Front-end Developer",
+      company: "Reece",
+      location: "Guadalajara",
+      period: "Ene 2022 - Actual",
+      duration: "3+ años",
+      status: "current",
+      details: {
+        description: "Desarrollador frontend especializado en React y React Native, enfocado en desarrollo de aplicaciones web, mantenimiento de sistemas internos y creación de nuevas aplicaciones.",
+        technologies: ["React", "React Native", "TypeScript", "JavaScript", "HTML", "CSS", "Node.js", "Git"],
+        achievements: [
+          "Completar desarrollo de e-commerce completo en solo 3 meses",
+          "Desarrollo de aplicaciones web modernas y responsivas",
+          "Mantenimiento y mejora de aplicaciones web internas",
+          "Creación de nuevas aplicaciones desde cero",
+          "Implementación de mejores prácticas de desarrollo",
+          "Optimización de rendimiento en aplicaciones existentes"
+        ],
+        methodologies: ["Metodología Ágil", "Desarrollo Iterativo"]
+      }
+    },
+    {
+      id: "softtek",
+      title: "Programador Expert",
+      company: "Softtek",
+      location: "CDMX",
+      period: "Sep 2020 - Dic 2021",
+      duration: "1 año 4 meses",
+      status: "completed",
+      details: {
+        description: "Desarrollador frontend experto en proyectos internos y externos, especializado en Angular y desarrollo de aplicaciones empresariales complejas.",
+        technologies: ["Angular 9-10", "TypeScript", "JavaScript", "Java", "CSS", "Angular Material", "Git", "TFS"],
+        achievements: [
+          "Desarrollo de MVP en 1 semana y versión 1 en 1 mes",
+          "Creación de modal con calendario personalizado reutilizable",
+          "Ajuste de Angular Material para sistemas corporativos",
+          "Servicio de reportes para generar archivos Excel desde frontend",
+          "Desarrollo de lector de códigos QR para aplicaciones web",
+          "Aplicaciones responsivas para PC y tabletas"
+        ],
+        methodologies: ["Metodología Ágil", "Scrum", "Jira"]
+      }
+    },
+    {
+      id: "mind-help",
+      title: "Front-End SR.",
+      company: "Mind Help",
+      location: "Guadalajara",
+      period: "Oct 2019 - Ago 2020",
+      duration: "11 meses",
+      status: "completed",
+      details: {
+        description: "Desarrollador frontend senior y líder de equipo en startup de salud mental, refactorizando aplicaciones móviles y desarrollando sistemas desde cero.",
+        technologies: ["Angular 8", "TypeScript", "JavaScript", "Node.js", "Ionic 2", "GitHub", "Atlassian"],
+        achievements: [
+          "Terminación de 2 aplicaciones en 5 meses con equipo pequeño",
+          "Refactorización completa del sistema con mejores prácticas",
+          "Desarrollo de webs para usuarios y doctores desde cero",
+          "Gestión de equipo junto con Scrum Master",
+          "Startup dentro de las 100 más valiosas del 2020"
+        ],
+        methodologies: ["Metodología Ágil"]
+      }
+    },
+    {
+      id: "hp-inc",
+      title: "Programador",
+      company: "HP Inc",
+      location: "Guadalajara",
+      period: "May 2018 - Ene 2020",
+      duration: "1 año 9 meses",
+      status: "completed",
+      details: {
+        description: "Desarrollador frontend principal en HP Inc, trabajando con Angular y liderando equipos para el desarrollo de aplicaciones internas.",
+        technologies: ["Angular 4-6", "TypeScript", "JavaScript", "C#", "Jira", "Atlassian"],
+        achievements: [
+          "Desarrollo de aplicaciones en menos de 1 mes",
+          "Ayuda al área para obtener premio por mejor aplicación",
+          "Programación y gestión independiente de web",
+          "Dirección de equipo para aplicación de uso interno",
+          "Refactorización de aplicaciones internas con Angular 5-6"
+        ],
+        methodologies: ["Metodología Ágil", "Scrum"]
+      }
+    },
+    {
+      id: "aori",
+      title: "Programador",
+      company: "AORI",
+      location: "Guadalajara",
+      period: "Ene 2017 - May 2018",
+      duration: "1 año 5 meses",
+      status: "completed",
+      details: {
+        description: "Desarrollador full-stack especializado en aplicaciones web tipo Uber/DiDi y aplicaciones móviles híbridas, evolucionando hasta líder de equipo.",
+        technologies: ["Angular 2", "Ionic 2", "React", "TypeScript", "PHP", "Laravel", "Git Bucket"],
+        achievements: [
+          "Dirigir equipo para lanzamiento de aplicación en 5 meses",
+          "Desarrollo de aplicaciones tipo Uber/DiDi y de apuestas",
+          "Creación de landing pages y portafolios médicos",
+          "Desarrollo de aplicaciones móviles híbridas con React Native e Ionic 2",
+          "Liderazgo de equipo con levantamiento de requerimientos y gestión de cliente"
+        ],
+        methodologies: ["Desarrollo Ágil"]
+      }
+    },
+    {
+      id: "freelance",
+      title: "Programador Freelance",
+      company: "Freelance",
+      location: "Guadalajara",
+      period: "2016 - 2021",
+      duration: "5 años",
+      status: "completed",
+      details: {
+        description: "Desarrollador freelance especializado en proyectos diversos, desde landing pages hasta e-commerce y sistemas completos con backend y frontend.",
+        technologies: ["HTML", "CSS", "JavaScript", "Angular JS", "Angular 2-12", "React", "React Native", "Ionic", "PHP", "Python Flask", "WordPress"],
+        achievements: [
+          "Desarrollo exitoso de 3 e-commerce con WordPress",
+          "Sistemas backend y frontend con PHP y Angular JS",
+          "Proyectos con clientes de Estados Unidos usando React",
+          "Mantenimiento y soporte para equipos pequeños",
+          "Completar todos los contratos de forma satisfactoria"
+        ],
+        methodologies: ["Desarrollo Independiente"]
+      }
+    },
+    {
+      id: "bis-soluciones",
+      title: "Programador Jr.",
+      company: "BIS Soluciones",
+      location: "CDMX",
+      period: "Ene 2015 - May 2015",
+      duration: "5 meses",
+      status: "completed",
+      details: {
+        description: "Desarrollador junior enfocado en desarrollo de pruebas de concepto y demos para aplicaciones internas de la empresa.",
+        technologies: ["Ionic 1", "JavaScript"],
+        achievements: [
+          "Desarrollo de pruebas de concepto para demos internos",
+          "Creación de aplicaciones demo con Ionic 1",
+          "Demostración de capacidades del framework Ionic"
+        ],
+        methodologies: ["Desarrollo de Prototipos"]
+      }
+    }
+  ];
+
+  function initExperienceTerminal() {
+    const experienceItems = document.querySelectorAll('.experience-item');
+    const modal = document.getElementById('experience-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContent = document.getElementById('modal-content');
+    const closeButton = document.getElementById('close-modal');
+
+    function showModal(expId: string) {
+      const experience = experiences.find(exp => exp.id === expId);
+      if (!experience || !modal || !modalTitle || !modalContent) return;
+
+      // Actualizar título del terminal
+      modalTitle.textContent = `eduardo@dev:~$ cat ${experience.company.toLowerCase().replace(/\s+/g, '-')}-experience.txt`;
+
+      // Crear contenido detallado con estilo terminal
+      modalContent.innerHTML = `
+        <div class="space-y-6">
+          <!-- Información básica -->
+          <div>
+            <p class="text-cyan-400"><span class="text-green-400">$</span> echo "=== INFORMACIÓN BÁSICA ==="</p>
+            <div class="ml-4 mt-2 space-y-1">
+              <p class="text-white"><span class="text-yellow-400">Puesto:</span> ${experience.title}</p>
+              <p class="text-white"><span class="text-yellow-400">Empresa:</span> ${experience.company}</p>
+              <p class="text-white"><span class="text-yellow-400">Ubicación:</span> ${experience.location}</p>
+              <p class="text-white"><span class="text-yellow-400">Período:</span> ${experience.period}</p>
+              <p class="text-white"><span class="text-yellow-400">Duración:</span> ${experience.duration}</p>
+              <p class="text-white"><span class="text-yellow-400">Estado:</span> <span class="${experience.status === 'current' ? 'text-green-400' : 'text-slate-400'}">${experience.status === 'current' ? 'ACTIVO' : 'COMPLETADO'}</span></p>
+            </div>
+          </div>
+
+          <!-- Descripción -->
+          <div>
+            <p class="text-cyan-400"><span class="text-green-400">$</span> echo "=== DESCRIPCIÓN DEL ROL ==="</p>
+            <div class="ml-4 mt-2">
+              <p class="text-slate-300 leading-relaxed">${experience.details.description}</p>
+            </div>
+          </div>
+          
+          <!-- Tecnologías -->
+          <div>
+            <p class="text-cyan-400"><span class="text-green-400">$</span> ls -la technologies/</p>
+            <div class="ml-4 mt-2">
+              <div class="flex flex-wrap gap-2">
+                ${experience.details.technologies.map(tech => 
+                  `<span class="bg-cyan-500/20 border border-cyan-400/30 text-cyan-400 px-3 py-1 rounded text-sm font-mono">${tech}</span>`
+                ).join('')}
+              </div>
+            </div>
+          </div>
+          
+          <!-- Logros -->
+          <div>
+            <p class="text-cyan-400"><span class="text-green-400">$</span> cat achievements.txt</p>
+            <div class="ml-4 mt-2">
+              <ul class="space-y-2">
+                ${experience.details.achievements.map(achievement => 
+                  `<li class="text-slate-300 flex items-start gap-2">
+                    <span class="text-green-400 mt-1">✓</span>
+                    <span>${achievement}</span>
+                  </li>`
+                ).join('')}
+              </ul>
+            </div>
+          </div>
+          
+          ${experience.details.methodologies ? `
+          <!-- Metodologías -->
+          <div>
+            <p class="text-cyan-400"><span class="text-green-400">$</span> echo "=== METODOLOGÍAS ==="</p>
+            <div class="ml-4 mt-2">
+              <div class="flex flex-wrap gap-2">
+                ${experience.details.methodologies.map(method => 
+                  `<span class="bg-purple-500/20 border border-purple-400/30 text-purple-400 px-3 py-1 rounded text-sm font-mono">${method}</span>`
+                ).join('')}
+              </div>
+            </div>
+          </div>
+          ` : ''}
+          
+          <!-- Footer del terminal -->
+          <div class="pt-4 border-t border-cyan-400/20">
+            <p class="text-green-400"><span class="text-cyan-400">$</span> echo "Experiencia cargada exitosamente"</p>
+            <p class="text-slate-500 text-sm mt-1">Presiona ESC o click en X para cerrar</p>
+          </div>
+        </div>
+      `;
+
+      // Mostrar modal con animación
+      modal.classList.remove('hidden');
+      modal.style.opacity = '0';
+      
+      setTimeout(() => {
+        modal.style.opacity = '1';
+        modal.style.transition = 'opacity 0.3s ease';
+      }, 10);
+
+      // Prevenir scroll del body
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hideModal() {
+      if (!modal) return;
+      
+      modal.style.opacity = '0';
+      
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        // Restaurar scroll del body
+        document.body.style.overflow = 'auto';
+      }, 300);
+    }
+
+    // Event listeners
+    experienceItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const expId = item.getAttribute('data-exp-id');
+        if (expId) {
+          showModal(expId);
+        }
+      });
+    });
+
+    if (closeButton) {
+      closeButton.addEventListener('click', hideModal);
+    }
+
+    // Cerrar modal al hacer click fuera
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          hideModal();
+        }
+      });
+    }
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        hideModal();
+      }
+    });
+
+    console.log('Experience Terminal Modal inicializado');
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initExperienceTerminal);
+  } else {
+    initExperienceTerminal();
+  }
+</script>
+
+<style>
+  .experience-item {
+    transition: all 0.3s ease;
+  }
+
+  .experience-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.1);
+  }
+
+  /* Modal styles */
+  #experience-modal {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  #experience-modal .bg-black\/95 {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Terminal scrollbar styling */
+  #experience-modal .overflow-y-auto::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  #experience-modal .overflow-y-auto::-webkit-scrollbar-track {
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: 4px;
+  }
+
+  #experience-modal .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: rgba(6, 182, 212, 0.3);
+    border-radius: 4px;
+  }
+
+  #experience-modal .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: rgba(6, 182, 212, 0.5);
+  }
+
+  /* Animation for modal appearance */
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  #experience-modal:not(.hidden) > div {
+    animation: modalSlideIn 0.3s ease-out;
+  }
+
+  /* Responsive modal */
+  @media (max-width: 768px) {
+    #experience-modal > div {
+      margin: 1rem;
+      max-height: calc(100vh - 2rem);
+    }
+  }
+</style>

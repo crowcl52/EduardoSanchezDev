@@ -1,0 +1,185 @@
+{
+    "nav": { 
+      "about": "Sobre mí", 
+      "experience": "Experiencia", 
+      "skills": "Habilidades", 
+      "portfolio": "Portafolio", 
+      "social": "Social", 
+      "blog": "Blog" 
+    },
+    "hero": {
+      "title": "Eduardo Sánchez",
+      "role": "Front-end Developer",
+      "tagline": "Construyo aplicaciones web y móviles con React, React Native y buenas prácticas.",
+      "cta": "Ver portafolio"
+    },
+    "about": {
+      "title": "Sobre mí",
+      "body": "Desarrollador front-end con foco en React/React Native, performance y DX. Experiencia creando nuevas apps y manteniendo sitios en producción."
+    },
+    "experience": {
+      "title": "Experiencia Profesional",
+      "subtitle": "Trayectoria profesional",
+      "current": "ACTIVO",
+      "completed": "COMPLETADO"
+    },
+    "skills": {
+      "title": "Habilidades Técnicas",
+      "subtitle": "Tecnologías dominadas",
+      "total": "Total: {count} tecnologías dominadas"
+    },
+    "portfolio": {
+      "title": "Mis Proyectos",
+      "subtitle": "Proyectos destacados",
+      "freelance": {
+        "title": "Experiencia Freelance",
+        "subtitle": "2016 - 2021 • 5+ años de experiencia independiente",
+        "projects": "100+ Proyectos Completados",
+        "description": "Para diferentes compañías y startups",
+        "achievements": {
+          "ecommerce": "3 E-commerce con WordPress",
+          "usa": "Proyectos con clientes de EE.UU.",
+          "completed": "100% contratos completados"
+        }
+      },
+      "upcoming": {
+        "title": "Más Proyectos Próximamente",
+        "subtitle": "Proyectos en desarrollo y próximos lanzamientos",
+        "developing": "En desarrollo...",
+        "soon": "Próximamente...",
+        "projects": {
+          "web": "Aplicaciones web con React y Node.js",
+          "systems": "Sistemas de gestión empresarial",
+          "mobile": "Aplicaciones móviles con React Native",
+          "ecommerce": "E-commerce con tecnologías modernas",
+          "dashboards": "Dashboards interactivos",
+          "ai": "Integración con tecnologías de IA"
+        }
+      },
+      "footer": {
+        "total": "Total: 3 proyectos destacados + 100+ freelance + próximos lanzamientos",
+        "github": "Más proyectos disponibles en GitHub"
+      }
+    },
+    "social": {
+      "title": "Enlaces Sociales",
+      "fastLinks": {
+        "title": "Enlaces rápidos",
+        "repository": "Repositorio",
+        "contact": "Contactar WhatsApp",
+        "cv": "Descargar mi CV"
+      },
+      "socialLinks": {
+        "title": "Enlaces sociales",
+        "github": "GitHub",
+        "linkedin": "LinkedIn",
+        "whatsapp": "WhatsApp"
+      }
+    },
+    "footer": {
+      "title": "Pie de página",
+      "copyright": "Hecho con ❤️ bajo la licencia MIT | 2025 Eduardo Sánchez",
+      "madeWith": "Hecho con ❤️ bajo la licencia MIT",
+      "year": "2025 Eduardo Sánchez"
+    },
+    "slime": {
+      "greeting": "¡HOLA!",
+      "message": "Parece que te gustan los slimes<br>pronto tendrás más esperalo...",
+      "alt": "Mascot slime"
+    },
+    "profile": {
+      "title": "About Eduardo",
+      "description": "Fan de JavaScript 😍. Siempre buscando nuevas habilidades para aprender.",
+      "subtitle": "¿Qué me hace diferente?",
+      "content": "¡Genuinamente amo lo que hago! 💙 Me encanta transformar ideas en soluciones digitales únicas. 💡 Mi enfoque va más allá de la programación—se trata de crear experiencias que cautiven y resuelvan problemas del mundo real de maneras innovadoras. 🚀",
+      "downloadCV": "Descargar CV",
+      "contactMe": "Contactame"
+    },
+    "experience": {
+      "title": "Experiencia Profesional",
+      "subtitle": "Trayectoria profesional",
+      "current": "ACTIVO",
+      "completed": "COMPLETADO",
+      "trajectory": "Trayectoria"
+    },
+    "tech": {
+      "title": "Habilidades Técnicas",
+      "subtitle": "Tecnologías dominadas",
+      "total": "Total: {count} tecnologías dominadas",
+      "productionReady": "production-ready",
+      "technologiesMastered": "Total: {count} technologies mastered"
+    },
+    "portfolio": {
+      "title": "Mis Proyectos",
+      "subtitle": "Proyectos destacados",
+      "projects": {
+        "ingresosEgresos": {
+          "title": "💰 Ingresos Egresos App",
+          "description": "Aplicación web para gestión de finanzas personales con Firebase y Angular",
+          "technologies": ["Angular", "Firebase", "TypeScript", "Authentication"],
+          "button": "🚀 Ver Proyecto"
+        },
+        "cvBuilder": {
+          "title": "📄 Plataforma de CV Builder",
+          "description": "Plataforma web para creación y gestión de currículums profesionales",
+          "technologies": ["Angular", "Firebase", "TypeScript", "PDF Generation"],
+          "platform": "🏗️ Plataforma",
+          "sample": "📋 CV Muestra"
+        },
+        "franciscoRubio": {
+          "title": "🎨 Portfolio Francisco Rubio",
+          "description": "Portfolio profesional desarrollado para Francisco Rubio",
+          "technologies": ["React", "Netlify", "CSS3", "Responsive"],
+          "button": "🌐 Ver Portfolio"
+        }
+      },
+      "freelance": {
+        "title": "Experiencia Freelance",
+        "subtitle": "2016 - 2021 • 5+ años de experiencia independiente",
+        "projects": "100+ Proyectos Completados",
+        "description": "Para diferentes compañías y startups",
+        "achievements": {
+          "ecommerce": "3 E-commerce con WordPress",
+          "usa": "Proyectos con clientes de EE.UU.",
+          "completed": "100% contratos completados"
+        }
+      },
+      "upcoming": {
+        "title": "Más Proyectos Próximamente",
+        "subtitle": "Proyectos en desarrollo y próximos lanzamientos",
+        "developing": "En desarrollo...",
+        "soon": "Próximamente...",
+        "projects": {
+          "web": "Aplicaciones web con React y Node.js",
+          "systems": "Sistemas de gestión empresarial",
+          "mobile": "Aplicaciones móviles con React Native",
+          "ecommerce": "E-commerce con tecnologías modernas",
+          "dashboards": "Dashboards interactivos",
+          "ai": "Integración con tecnologías de IA"
+        }
+      },
+      "footer": {
+        "total": "Total: 3 proyectos destacados + 100+ freelance + próximos lanzamientos",
+        "github": "Más proyectos disponibles en GitHub"
+      }
+    },
+    "terminal": {
+      "prompt": "eduardo@dev:~$",
+      "commands": {
+        "catAbout": "cat about.txt",
+        "catSocial": "cat social.txt",
+        "lsSkills": "ls skills/",
+        "lsProjects": "ls projects/",
+        "whoami": "whoami",
+        "echoAbout": "echo \"About Eduardo\"",
+        "echoTotal": "echo \"Total: {count} technologies mastered\"",
+        "echoPortfolio": "echo \"=== {title} ===\"",
+        "echoTotalProjects": "echo \"{total}\"",
+        "gitStatus": "git status --porcelain"
+      },
+      "buttons": {
+        "portfolio": "./portfolio.sh",
+        "contact": "contact.me"
+      }
+    }
+  }

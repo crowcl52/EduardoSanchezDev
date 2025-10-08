@@ -1,0 +1,356 @@
+---
+// Componente para el slime que aparece en las terminales
+const { lang = "es", labels = {} } = Astro.props;
+---
+
+<div id="terminal-slime" class="terminal-slime">
+  <img src="/Slime_Player.png" alt={labels.slime?.alt || "Slime mascot"} class="slime-image" />
+  <div class="slime-tooltip" id="slime-tooltip">
+    <div class="tooltip-content">
+      <strong>{labels.slime?.greeting || "HELLO!"}</strong><br>
+      <span set:html={labels.slime?.message || "Looks like you like slimes<br>soon you'll have more wait for it..."}></span>
+    </div>
+  </div>
+</div>
+
+<script is:raw>
+  function initTerminalSlime() {
+    const slime = document.getElementById('terminal-slime');
+    const tooltip = document.getElementById('slime-tooltip');
+    if (!slime || !tooltip) return;
+
+    // Inicializar tooltip como oculto
+    tooltip.style.display = 'none';
+    tooltip.style.opacity = '0';
+    
+    console.log('Tooltip encontrado:', tooltip);
+    console.log('Tooltip text:', tooltip.textContent);
+    console.log('Tooltip display:', tooltip.style.display);
+    console.log('Tooltip opacity:', tooltip.style.opacity);
+
+    // Obtener todas las secciones con terminales
+    const terminalSections = document.querySelectorAll('section[id]');
+    
+    // Función para mostrar/ocultar slime según la sección visible
+    function updateSlimeVisibility() {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const viewportCenter = scrollY + windowHeight / 2;
+
+      let activeSection = null;
+      let closestDistance = Infinity;
+
+      // Encontrar la sección más cercana al centro del viewport
+      terminalSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const sectionTop = scrollY + rect.top;
+        const sectionBottom = sectionTop + rect.height;
+        const sectionCenter = sectionTop + rect.height / 2;
+
+        // Verificar si la sección está en el viewport
+        if (sectionTop < scrollY + windowHeight && sectionBottom > scrollY) {
+          const distance = Math.abs(viewportCenter - sectionCenter);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            activeSection = section;
+          }
+        }
+      });
+
+      // Mostrar slime si hay una sección activa
+      if (activeSection) {
+        // Buscar terminales con diferentes selectores
+        const terminal = activeSection.querySelector('.bg-black\\/90') || 
+                       activeSection.querySelector('.bg-black\\/80') ||
+                       activeSection.querySelector('[class*="bg-black"]');
+        
+        if (terminal) {
+          const terminalRect = terminal.getBoundingClientRect();
+          
+          // Verificar que la terminal esté visible
+          if (terminalRect.top < windowHeight && terminalRect.bottom > 0) {
+            // Posicionar el slime más escondido en la esquina, muy sutil
+            const slimeSize = window.innerWidth <= 480 ? 30 : window.innerWidth <= 768 ? 35 : 40;
+            const peekAmount = window.innerWidth <= 480 ? 8 : window.innerWidth <= 768 ? 10 : 12;
+            
+            slime.style.position = 'fixed';
+            slime.style.top = `${terminalRect.top - (slimeSize - peekAmount)}px`;
+            slime.style.right = `${window.innerWidth - terminalRect.right - (slimeSize - peekAmount)}px`;
+            slime.style.zIndex = '10'; // Detrás de la terminal (que tiene z-index más alto)
+            slime.style.display = 'block';
+            
+            // Agregar clase para efecto de asomarse
+            slime.classList.add('slime-peeking');
+            
+            // Agregar animación de entrada
+            setTimeout(() => {
+              slime.classList.add('slime-visible');
+            }, 100);
+          }
+        }
+      } else {
+        // Ocultar slime si no hay sección activa
+        slime.classList.remove('slime-visible');
+        setTimeout(() => {
+          if (!slime.classList.contains('slime-visible')) {
+            slime.style.display = 'none';
+          }
+        }, 300);
+      }
+    }
+
+    // Inicializar slime como oculto
+    slime.style.display = 'none';
+    slime.style.opacity = '0';
+    slime.style.transform = 'translateY(-20px)';
+
+    // Event listeners
+    window.addEventListener('scroll', updateSlimeVisibility);
+    window.addEventListener('resize', updateSlimeVisibility);
+    
+    // Event listeners para el tooltip
+    slime.addEventListener('mouseenter', () => {
+      tooltip.style.display = 'block';
+      tooltip.style.opacity = '1';
+      tooltip.style.visibility = 'visible';
+      console.log('Hover iniciado - tooltip visible');
+    });
+    
+    slime.addEventListener('mouseleave', () => {
+      tooltip.style.display = 'none';
+      tooltip.style.opacity = '0';
+      tooltip.style.visibility = 'hidden';
+      console.log('Hover terminado - tooltip oculto');
+    });
+    
+    // Inicializar posición
+    updateSlimeVisibility();
+
+    console.log('Terminal Slime inicializado');
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTerminalSlime);
+  } else {
+    initTerminalSlime();
+  }
+</script>
+
+<style>
+  .terminal-slime {
+    position: fixed;
+    z-index: 10; /* Detrás de las terminales por defecto */
+    pointer-events: auto; /* Habilitar hover */
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+    cursor: pointer;
+  }
+
+  .terminal-slime:hover {
+    z-index: 1001 !important; /* Enfrente de todo cuando hay hover */
+    transform: translateY(-10px) scale(1.8) !important;
+    filter: brightness(1.2) saturate(1.3);
+  }
+
+  /* Efecto de "salir" de la terminal cuando hay hover */
+  .terminal-slime:hover .slime-peeking {
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .slime-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .slime-peeking {
+    /* Efecto de asomarse desde el borde */
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .slime-image {
+    width: 40px;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    animation: slimePeek 4s ease-in-out infinite;
+    transition: all 0.3s ease;
+  }
+
+  /* Animación más sutil cuando está detrás */
+  .terminal-slime:not(:hover) .slime-image {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+    animation: slimePeekSubtle 8s ease-in-out infinite;
+    opacity: 0.7;
+  }
+
+  /* Animación más expresiva cuando está enfrente (hover) */
+  .terminal-slime:hover .slime-image {
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+    animation: slimePeekExcited 1.2s ease-in-out infinite;
+    transform: scale(1.1);
+  }
+
+  @keyframes slimePeekSubtle {
+    0%, 85%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    20%, 70% {
+      transform: translateY(-2px) scale(1.005);
+    }
+    45% {
+      transform: translateY(-1px) scale(1.002);
+    }
+  }
+
+  @keyframes slimePeekExcited {
+    0%, 100% {
+      transform: scale(1.1) translateY(0);
+    }
+    25%, 75% {
+      transform: scale(1.15) translateY(-8px);
+    }
+    50% {
+      transform: scale(1.12) translateY(-4px);
+    }
+  }
+
+  @keyframes slimePeek {
+    0%, 70%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    10%, 60% {
+      transform: translateY(-8px) scale(1.1);
+    }
+    35% {
+      transform: translateY(-3px) scale(1.05);
+    }
+  }
+
+  /* Animación de entrada más suave */
+  .terminal-slime {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .slime-image {
+      width: 35px;
+    }
+    
+    /* Ajustar peek amount para tablets */
+    .slime-peeking {
+      border-radius: 50%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .slime-image {
+      width: 30px;
+    }
+    
+    /* Ajustar peek amount para móviles */
+    .slime-peeking {
+      border-radius: 50%;
+    }
+  }
+
+  /* Efecto de profundidad para simular que está detrás del borde */
+  .slime-peeking::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  /* Tooltip del slime */
+  .slime-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    color: #000000;
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    line-height: 1.4;
+    border: 4px solid #000000;
+    box-shadow: 4px 4px 0px #000000, 8px 8px 0px #666666;
+    z-index: 99999;
+    pointer-events: none;
+    margin-bottom: 15px;
+    max-width: 250px;
+  }
+
+  .tooltip-content {
+    display: block;
+  }
+
+  .slime-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid transparent;
+    border-top-color: #ffffff;
+  }
+
+  .slime-tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 14px solid transparent;
+    border-top-color: #000000;
+    margin-top: 4px;
+  }
+
+  /* Animación retro de videojuego */
+  .terminal-slime:hover .slime-tooltip {
+    animation: retroBlink 0.5s ease-in-out;
+  }
+
+  @keyframes retroBlink {
+    0%, 100% {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+    25% {
+      opacity: 0.8;
+      transform: translateX(-50%) scale(1.02);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+    75% {
+      opacity: 0.9;
+      transform: translateX(-50%) scale(0.98);
+    }
+  }
+
+  /* Hover controlado por JavaScript */
+
+  @keyframes tooltipPulse {
+    0%, 100% {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      border-color: rgba(6, 182, 212, 0.4);
+    }
+    50% {
+      box-shadow: 0 8px 20px rgba(6, 182, 212, 0.2), 0 0 20px rgba(6, 182, 212, 0.1);
+      border-color: rgba(6, 182, 212, 0.6);
+    }
+  }
+</style>

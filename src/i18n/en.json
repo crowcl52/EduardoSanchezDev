@@ -1,0 +1,185 @@
+{
+  "nav": { 
+    "about": "About", 
+    "experience": "Experience", 
+    "skills": "Skills", 
+    "portfolio": "Portfolio", 
+    "social": "Social", 
+    "blog": "Blog" 
+  },
+  "hero": {
+    "title": "Eduardo Sánchez",
+    "role": "Front-end Developer",
+    "tagline": "I build web and mobile apps with React, React Native, and best practices.",
+    "cta": "View portfolio"
+  },
+  "about": {
+    "title": "About me",
+    "body": "Front-end developer focused on React/React Native, performance, and DX. Experienced in building new apps and maintaining production sites."
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "subtitle": "Professional trajectory",
+    "current": "CURRENT",
+    "completed": "COMPLETED"
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "subtitle": "Mastered technologies",
+    "total": "Total: {count} mastered technologies"
+  },
+  "portfolio": {
+    "title": "My Projects",
+    "subtitle": "Featured projects",
+    "freelance": {
+      "title": "Freelance Experience",
+      "subtitle": "2016 - 2021 • 5+ years of independent experience",
+      "projects": "100+ Completed Projects",
+      "description": "For different companies and startups",
+      "achievements": {
+        "ecommerce": "3 E-commerce with WordPress",
+        "usa": "Projects with US clients",
+        "completed": "100% contracts completed"
+      }
+    },
+    "upcoming": {
+      "title": "More Projects Coming Soon",
+      "subtitle": "Projects in development and upcoming launches",
+      "developing": "In development...",
+      "soon": "Coming soon...",
+      "projects": {
+        "web": "Web applications with React and Node.js",
+        "systems": "Enterprise management systems",
+        "mobile": "Mobile applications with React Native",
+        "ecommerce": "E-commerce with modern technologies",
+        "dashboards": "Interactive dashboards",
+        "ai": "Integration with AI technologies"
+      }
+    },
+    "footer": {
+      "total": "Total: 3 featured projects + 100+ freelance + upcoming launches",
+      "github": "More projects available on GitHub"
+    }
+  },
+    "social": {
+      "title": "Social Links",
+      "fastLinks": {
+        "title": "Quick links",
+        "repository": "Repository",
+        "contact": "Contact WhatsApp",
+        "cv": "Download my CV"
+      },
+      "socialLinks": {
+        "title": "Social links",
+        "github": "GitHub",
+        "linkedin": "LinkedIn",
+        "whatsapp": "WhatsApp"
+      }
+    },
+    "footer": {
+      "title": "Footer",
+      "copyright": "Made with ❤️ under the MIT license | 2025 Eduardo Sánchez",
+      "madeWith": "Made with ❤️ under the MIT license",
+      "year": "2025 Eduardo Sánchez"
+    },
+    "slime": {
+      "greeting": "HELLO!",
+      "message": "Looks like you like slimes<br>soon you'll have more wait for it...",
+      "alt": "Slime mascot"
+    },
+    "profile": {
+      "title": "About Eduardo",
+      "description": "JavaScript Fan 😍. Always looking for new skills to learn.",
+      "subtitle": "What sets me apart?",
+      "content": "I genuinely love what I do! 💙 I thrive on transforming ideas into unique digital solutions. 💡 My focus goes beyond coding—it's about creating experiences that captivate and solve real-world problems in innovative ways. 🚀",
+      "downloadCV": "Download CV",
+      "contactMe": "Contact Me"
+    },
+    "experience": {
+      "title": "Professional Experience",
+      "subtitle": "Professional trajectory",
+      "current": "CURRENT",
+      "completed": "COMPLETED",
+      "trajectory": "Trajectory"
+    },
+    "tech": {
+      "title": "Technical Skills",
+      "subtitle": "Mastered technologies",
+      "total": "Total: {count} mastered technologies",
+      "productionReady": "production-ready",
+      "technologiesMastered": "Total: {count} technologies mastered"
+    },
+    "portfolio": {
+      "title": "My Projects",
+      "subtitle": "Featured projects",
+      "projects": {
+        "ingresosEgresos": {
+          "title": "💰 Income Expenses App",
+          "description": "Web application for personal finance management with Firebase and Angular",
+          "technologies": ["Angular", "Firebase", "TypeScript", "Authentication"],
+          "button": "🚀 View Project"
+        },
+        "cvBuilder": {
+          "title": "📄 CV Builder Platform",
+          "description": "Web platform for creating and managing professional resumes",
+          "technologies": ["Angular", "Firebase", "TypeScript", "PDF Generation"],
+          "platform": "🏗️ Platform",
+          "sample": "📋 Sample CV"
+        },
+        "franciscoRubio": {
+          "title": "🎨 Francisco Rubio Portfolio",
+          "description": "Professional portfolio developed for Francisco Rubio",
+          "technologies": ["React", "Netlify", "CSS3", "Responsive"],
+          "button": "🌐 View Portfolio"
+        }
+      },
+      "freelance": {
+        "title": "Freelance Experience",
+        "subtitle": "2016 - 2021 • 5+ years of independent experience",
+        "projects": "100+ Completed Projects",
+        "description": "For different companies and startups",
+        "achievements": {
+          "ecommerce": "3 E-commerce with WordPress",
+          "usa": "Projects with US clients",
+          "completed": "100% contracts completed"
+        }
+      },
+      "upcoming": {
+        "title": "More Projects Coming Soon",
+        "subtitle": "Projects in development and upcoming launches",
+        "developing": "In development...",
+        "soon": "Coming soon...",
+        "projects": {
+          "web": "Web applications with React and Node.js",
+          "systems": "Enterprise management systems",
+          "mobile": "Mobile applications with React Native",
+          "ecommerce": "E-commerce with modern technologies",
+          "dashboards": "Interactive dashboards",
+          "ai": "Integration with AI technologies"
+        }
+      },
+      "footer": {
+        "total": "Total: 3 featured projects + 100+ freelance + upcoming launches",
+        "github": "More projects available on GitHub"
+      }
+    },
+    "terminal": {
+      "prompt": "eduardo@dev:~$",
+      "commands": {
+        "catAbout": "cat about.txt",
+        "catSocial": "cat social.txt",
+        "lsSkills": "ls skills/",
+        "lsProjects": "ls projects/",
+        "whoami": "whoami",
+        "echoAbout": "echo \"About Eduardo\"",
+        "echoTotal": "echo \"Total: {count} technologies mastered\"",
+        "echoPortfolio": "echo \"=== {title} ===\"",
+        "echoTotalProjects": "echo \"{total}\"",
+        "gitStatus": "git status --porcelain"
+      },
+      "buttons": {
+        "portfolio": "./portfolio.sh",
+        "contact": "contact.me"
+      }
+    }
+}

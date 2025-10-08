@@ -1,0 +1,361 @@
+---
+export async function getStaticPaths() {
+    return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+import Navbar from "../../components/Navbar.astro";
+import Hero from "../../components/Hero.astro";
+import ProfileSection from "../../components/ProfileSection.astro";
+import ExperienceTerminal from "../../components/ExperienceTerminal.astro";
+import Footer from "../../components/Footer.astro";
+import TerminalSlime from "../../components/TerminalSlime.astro";
+import { t } from "../../lib/i18n";
+import MainLayout from "../../layout/MainLayout.astro";
+import TechCarousel from "../../components/TechCarousel.astro";
+
+const lang = (Astro.params.lang ?? "es") as "es" | "en";
+const dict = await t(lang);
+---
+
+<MainLayout lang={lang} labels={dict.nav}>
+  <main class="mx-auto max-w-6xl px-4 md:px-8">
+        <Hero {...dict.hero} lang={lang} />
+        <ProfileSection lang={lang} labels={dict} />
+        <ExperienceTerminal lang={lang} labels={dict} />
+
+        <section id="skills" class="py-16">
+            <TechCarousel lang={lang} labels={dict} />
+    </section>
+
+        <section id="portfolio" class="py-16">
+            <div class="max-w-4xl mx-auto">
+                <!-- Terminal Header -->
+                <div class="bg-black/80 border border-cyan-400/30 rounded-t-lg p-3 mb-0">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <span class="ml-4 text-cyan-400 text-sm font-mono">eduardo@dev:~$ {dict.terminal?.commands?.lsProjects || "ls projects/"}</span>
+                    </div>
+                </div>
+                
+                <!-- Terminal Content -->
+                <div class="bg-black/90 border-x border-b border-cyan-400/30 p-8">
+                    <div class="font-mono text-green-400 space-y-6">
+                        <p><span class="text-cyan-400">$</span> {dict.terminal?.commands?.echoPortfolio?.replace('{title}', dict.portfolio.title) || `echo "=== ${dict.portfolio.title} ==="`}</p>
+                        
+                        <!-- Proyecto 1: Ingresos Egresos App -->
+                        <div class="project-item border border-cyan-400/20 rounded-lg p-6 bg-black/50 hover:border-cyan-300/50 transition-all cursor-pointer group">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="text-cyan-400 font-bold text-lg mb-2">{dict.portfolio.projects.ingresosEgresos.title}</h3>
+                                    <p class="text-slate-300 mb-3">{dict.portfolio.projects.ingresosEgresos.description}</p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="bg-red-500/20 border border-red-400/30 text-red-400 px-3 py-1 rounded text-sm">Angular</span>
+                                        <span class="bg-orange-500/20 border border-orange-400/30 text-orange-400 px-3 py-1 rounded text-sm">Firebase</span>
+                                        <span class="bg-blue-500/20 border border-blue-400/30 text-blue-400 px-3 py-1 rounded text-sm">TypeScript</span>
+                                        <span class="bg-purple-500/20 border border-purple-400/30 text-purple-400 px-3 py-1 rounded text-sm">Authentication</span>
+                                    </div>
+                                    <a href="https://platzisquare-1530807338653.firebaseapp.com/login" target="_blank" rel="noopener noreferrer" class="inline-block bg-cyan-500/20 border border-cyan-400/50 px-4 py-2 rounded text-cyan-400 hover:bg-cyan-500/30 transition-colors">
+                                        {dict.portfolio.projects.ingresosEgresos.button}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 2: Plataforma de CV -->
+                        <div class="project-item border border-cyan-400/20 rounded-lg p-6 bg-black/50 hover:border-cyan-300/50 transition-all cursor-pointer group">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="text-cyan-400 font-bold text-lg mb-2">{dict.portfolio.projects.cvBuilder.title}</h3>
+                                    <p class="text-slate-300 mb-3">{dict.portfolio.projects.cvBuilder.description}</p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="bg-red-500/20 border border-red-400/30 text-red-400 px-3 py-1 rounded text-sm">Angular</span>
+                                        <span class="bg-orange-500/20 border border-orange-400/30 text-orange-400 px-3 py-1 rounded text-sm">Firebase</span>
+                                        <span class="bg-blue-500/20 border border-blue-400/30 text-blue-400 px-3 py-1 rounded text-sm">TypeScript</span>
+                                        <span class="bg-green-500/20 border border-green-400/30 text-green-400 px-3 py-1 rounded text-sm">PDF Generation</span>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <a href="https://mycv-94fb2.firebaseapp.com/login" target="_blank" rel="noopener noreferrer" class="inline-block bg-cyan-500/20 border border-cyan-400/50 px-4 py-2 rounded text-cyan-400 hover:bg-cyan-500/30 transition-colors">
+                                            {dict.portfolio.projects.cvBuilder.platform}
+                                        </a>
+                                        <a href="https://mycv-94fb2.web.app/view/WEtKpVykTCadujjf0PzlyD8x7n22" target="_blank" rel="noopener noreferrer" class="inline-block bg-green-500/20 border border-green-400/50 px-4 py-2 rounded text-green-400 hover:bg-green-500/30 transition-colors">
+                                            {dict.portfolio.projects.cvBuilder.sample}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 3: Portfolio Francisco Rubio -->
+                        <div class="project-item border border-cyan-400/20 rounded-lg p-6 bg-black/50 hover:border-cyan-300/50 transition-all cursor-pointer group">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="text-cyan-400 font-bold text-lg mb-2">{dict.portfolio.projects.franciscoRubio.title}</h3>
+                                    <p class="text-slate-300 mb-3">{dict.portfolio.projects.franciscoRubio.description}</p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="bg-blue-500/20 border border-blue-400/30 text-blue-400 px-3 py-1 rounded text-sm">React</span>
+                                        <span class="bg-purple-500/20 border border-purple-400/30 text-purple-400 px-3 py-1 rounded text-sm">Netlify</span>
+                                        <span class="bg-cyan-500/20 border border-cyan-400/30 text-cyan-400 px-3 py-1 rounded text-sm">CSS3</span>
+                                        <span class="bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 px-3 py-1 rounded text-sm">Responsive</span>
+                                    </div>
+                                    <a href="https://frankrubio-portfolio.netlify.app/" target="_blank" rel="noopener noreferrer" class="inline-block bg-cyan-500/20 border border-cyan-400/50 px-4 py-2 rounded text-cyan-400 hover:bg-cyan-500/30 transition-colors">
+                                        {dict.portfolio.projects.franciscoRubio.button}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Experiencia Freelance -->
+                        <div class="freelance-section border border-purple-400/20 rounded-lg p-6 bg-gradient-to-r from-purple-500/10 to-blue-500/10">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="text-2xl">🚀</div>
+                                <div>
+                                    <h3 class="text-purple-400 font-bold text-lg">{dict.portfolio.freelance.title}</h3>
+                                    <p class="text-slate-300 text-sm">{dict.portfolio.freelance.subtitle}</p>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <p class="text-green-400 font-mono text-lg font-bold">{dict.portfolio.freelance.projects}</p>
+                                    <p class="text-slate-300 text-sm">{dict.portfolio.freelance.description}</p>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="freelance-badge bg-purple-500/20 border border-purple-400/30 text-purple-400 px-2 py-1 rounded text-xs">E-commerce</span>
+                                        <span class="freelance-badge bg-blue-500/20 border border-blue-400/30 text-blue-400 px-2 py-1 rounded text-xs">Landing Pages</span>
+                                        <span class="freelance-badge bg-green-500/20 border border-green-400/30 text-green-400 px-2 py-1 rounded text-xs">Sistemas Web</span>
+                                        <span class="freelance-badge bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 px-2 py-1 rounded text-xs">Apps Móviles</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-purple-400/20">
+                                <div class="flex flex-wrap gap-4 text-sm">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-cyan-400">✓</span>
+                                        <span class="text-slate-300">{dict.portfolio.freelance.achievements.ecommerce}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-cyan-400">✓</span>
+                                        <span class="text-slate-300">{dict.portfolio.freelance.achievements.usa}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-cyan-400">✓</span>
+                                        <span class="text-slate-300">{dict.portfolio.freelance.achievements.completed}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Proyectos Próximamente -->
+                        <div class="upcoming-projects border border-yellow-400/20 rounded-lg p-6 bg-gradient-to-r from-yellow-500/5 to-orange-500/5">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="text-2xl">🔮</div>
+                                <div>
+                                    <h3 class="text-yellow-400 font-bold text-lg">{dict.portfolio.upcoming.title}</h3>
+                                    <p class="text-slate-300 text-sm">{dict.portfolio.upcoming.subtitle}</p>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 bg-yellow-400 rounded-full pulse-dot"></div>
+                                        <span class="text-yellow-400 font-mono text-sm">{dict.portfolio.upcoming.developing}</span>
+                                    </div>
+                                    <p class="text-slate-300 text-sm">{dict.portfolio.upcoming.projects.web}</p>
+                                    <p class="text-slate-300 text-sm">{dict.portfolio.upcoming.projects.systems}</p>
+                                    <p class="text-slate-300 text-sm">{dict.portfolio.upcoming.projects.mobile}</p>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 bg-orange-400 rounded-full pulse-dot"></div>
+                                        <span class="text-orange-400 font-mono text-sm">{dict.portfolio.upcoming.soon}</span>
+                                    </div>
+                                    <p class="text-slate-300 text-sm">{dict.portfolio.upcoming.projects.ecommerce}</p>
+                                    <p class="text-slate-300 text-sm">{dict.portfolio.upcoming.projects.dashboards}</p>
+                                    <p class="text-slate-300 text-sm">{dict.portfolio.upcoming.projects.ai}</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-yellow-400/20">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-slate-400 text-sm font-mono">
+                                        <span class="text-cyan-400">$</span> {dict.terminal?.commands?.gitStatus || "git status --porcelain"}
+                                    </p>
+                                    <div class="flex gap-2">
+                                        <span class="bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 px-2 py-1 rounded text-xs">React</span>
+                                        <span class="bg-green-500/20 border border-green-400/30 text-green-400 px-2 py-1 rounded text-xs">Node.js</span>
+                                        <span class="bg-purple-500/20 border border-purple-400/30 text-purple-400 px-2 py-1 rounded text-xs">AI/ML</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Footer del terminal -->
+                        <div class="pt-4 border-t border-cyan-400/20">
+                            <p class="text-green-400"><span class="text-cyan-400">$</span> {dict.terminal?.commands?.echoTotalProjects?.replace('{total}', dict.portfolio.footer.total) || `echo "${dict.portfolio.footer.total}"`}</p>
+                            <p class="text-slate-500 text-sm mt-1">{dict.portfolio.footer.github}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="social" class="py-16">
+            <div class="max-w-4xl mx-auto">
+                <!-- Terminal Header -->
+                <div class="bg-black/80 border border-cyan-400/30 rounded-t-lg p-3 mb-0">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <span class="ml-4 text-cyan-400 text-sm font-mono">eduardo@dev:~$ {dict.terminal?.commands?.catSocial || "cat social.txt"}</span>
+                    </div>
+                </div>
+                
+                <!-- Terminal Content -->
+                <div class="bg-black/90 border-x border-b border-cyan-400/30 p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="font-mono text-green-400">
+                            <p><span class="text-cyan-400">$</span> cat {dict.social.fastLinks.title.toLowerCase().replace(/\s+/g, '')}.txt</p>
+                            <div class="mt-4 space-y-2">
+                                <a href="https://github.com/crowcl52" class="block text-blue-400 hover:text-blue-300" target="_blank" rel="noopener noreferrer">→ {dict.social.fastLinks.repository}</a>
+                                <a href="https://wa.me/523324349525" class="block text-green-400 hover:text-green-300" target="_blank" rel="noopener noreferrer">→ {dict.social.fastLinks.contact}</a>
+                                <a href="#" class="block text-purple-400 hover:text-purple-300">→ {dict.social.fastLinks.cv}</a>
+                            </div>
+                        </div>
+                        
+                               <div class="font-mono text-green-400">
+                                   <p><span class="text-cyan-400">$</span> cat {dict.social.socialLinks.title.toLowerCase().replace(/\s+/g, '')}.txt</p>
+                                   <div class="mt-4 space-y-2">
+                                       <a href="https://github.com/crowcl52" class="block text-blue-400 hover:text-blue-300" target="_blank" rel="noopener noreferrer">→ {dict.social.socialLinks.github}</a>
+                                       <a href="https://www.linkedin.com/in/eduardo-sanchez-457481b0/" class="block text-blue-600 hover:text-blue-500" target="_blank" rel="noopener noreferrer">→ {dict.social.socialLinks.linkedin}</a>
+                                       <a href="https://wa.me/523324349525" class="block text-green-500 hover:text-green-400" target="_blank" rel="noopener noreferrer">→ {dict.social.socialLinks.whatsapp}</a>
+                                   </div>
+                               </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+  </main>
+  <Footer lang={lang} labels={dict} />
+  <TerminalSlime lang={lang} labels={dict} />
+</MainLayout>
+
+<style>
+    /* Estilos para la sección de portfolio */
+    .project-item {
+        transition: all 0.3s ease;
+    }
+
+    .project-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(6, 182, 212, 0.15);
+    }
+
+    /* Animación de entrada para los proyectos */
+    .project-item {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .project-item:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .project-item:nth-child(3) {
+        animation-delay: 0.2s;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Estilos para la sección freelance */
+    .freelance-section {
+        background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+        border: 1px solid rgba(147, 51, 234, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .freelance-section:hover {
+        border-color: rgba(147, 51, 234, 0.4);
+        box-shadow: 0 8px 25px rgba(147, 51, 234, 0.15);
+        transform: translateY(-2px);
+    }
+
+    /* Animación para los badges de freelance */
+    .freelance-badge {
+        transition: all 0.3s ease;
+    }
+
+    .freelance-badge:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estilos para la sección de próximos proyectos */
+    .upcoming-projects {
+        background: linear-gradient(135deg, rgba(234, 179, 8, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+        border: 1px solid rgba(234, 179, 8, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .upcoming-projects:hover {
+        border-color: rgba(234, 179, 8, 0.4);
+        box-shadow: 0 8px 25px rgba(234, 179, 8, 0.1);
+        transform: translateY(-2px);
+    }
+
+    /* Animación de pulso para los indicadores */
+    .pulse-dot {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    /* Responsive para los proyectos */
+    @media (max-width: 768px) {
+        .project-item {
+            padding: 1rem;
+        }
+        
+        .project-item h3 {
+            font-size: 1rem;
+        }
+        
+        .project-item p {
+            font-size: 0.875rem;
+        }
+
+        .freelance-section {
+            padding: 1rem;
+        }
+
+        .freelance-section .grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .upcoming-projects {
+            padding: 1rem;
+        }
+
+        .upcoming-projects .grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+</style>
