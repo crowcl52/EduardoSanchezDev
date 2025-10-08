@@ -28,41 +28,32 @@ const { lang = "es", labels = {} } = Astro.props;
     console.log('Tooltip display:', tooltip.style.display);
     console.log('Tooltip opacity:', tooltip.style.opacity);
 
-    // Obtener todas las secciones con terminales
-    const terminalSections = document.querySelectorAll('section[id]');
+    // Obtener solo la sección "about"
+    const aboutSection = document.querySelector('#about');
     
-    // Función para mostrar/ocultar slime según la sección visible
+    // Función para mostrar/ocultar slime solo en la sección about
     function updateSlimeVisibility() {
+      if (!aboutSection) {
+        // Si no hay sección about, ocultar el slime
+        slime.style.display = 'none';
+        return;
+      }
+
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
-      const viewportCenter = scrollY + windowHeight / 2;
+      const sectionRect = aboutSection.getBoundingClientRect();
+      const sectionTop = scrollY + sectionRect.top;
+      const sectionBottom = sectionTop + sectionRect.height;
 
-      let activeSection = null;
-      let closestDistance = Infinity;
+      // Verificar si la sección about está en el viewport
+      const isAboutVisible = sectionTop < scrollY + windowHeight && sectionBottom > scrollY;
 
-      // Encontrar la sección más cercana al centro del viewport
-      terminalSections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        const sectionTop = scrollY + rect.top;
-        const sectionBottom = sectionTop + rect.height;
-        const sectionCenter = sectionTop + rect.height / 2;
-
-        // Verificar si la sección está en el viewport
-        if (sectionTop < scrollY + windowHeight && sectionBottom > scrollY) {
-          const distance = Math.abs(viewportCenter - sectionCenter);
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            activeSection = section;
-          }
-        }
-      });
-
-      // Mostrar slime si hay una sección activa
-      if (activeSection) {
-        // Buscar terminales con diferentes selectores
-        const terminal = activeSection.querySelector('.bg-black\\/90') || 
-                       activeSection.querySelector('.bg-black\\/80') ||
-                       activeSection.querySelector('[class*="bg-black"]');
+      // Mostrar slime solo si la sección about está visible
+      if (isAboutVisible) {
+        // Buscar terminales con diferentes selectores en la sección about
+        const terminal = aboutSection.querySelector('.bg-black\\/90') || 
+                       aboutSection.querySelector('.bg-black\\/80') ||
+                       aboutSection.querySelector('[class*="bg-black"]');
         
         if (terminal) {
           const terminalRect = terminal.getBoundingClientRect();
@@ -89,7 +80,7 @@ const { lang = "es", labels = {} } = Astro.props;
           }
         }
       } else {
-        // Ocultar slime si no hay sección activa
+        // Ocultar slime si la sección about no está visible
         slime.classList.remove('slime-visible');
         setTimeout(() => {
           if (!slime.classList.contains('slime-visible')) {
