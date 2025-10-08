@@ -1,18 +1,18 @@
 ---
 const { lang = "es", labels = {} } = Astro.props;
 const items = [
-  { name: "React", icon: "/src/icons/react.svg", fallback: "⚛️", color: "#61DAFB" },
-  { name: "React Native", icon: "/src/icons/reactnative.svg", fallback: "📱", color: "#61DAFB" },
-  { name: "TypeScript", icon: "/src/icons/ts.svg", fallback: "🔷", color: "#3178C6" },
-  { name: "JavaScript", icon: "/src/icons/js.svg", fallback: "🟨", color: "#F7DF1E" },
-  { name: "Node.js", icon: "/src/icons/node.svg", fallback: "🟢", color: "#339933" },
-  { name: "Angular", icon: "/src/icons/angular.svg", fallback: "🔺", color: "#DD0031" },
-  { name: "HTML5", icon: "/src/icons/html.svg", fallback: "🌐", color: "#E34F26" },
-  { name: "CSS3", icon: "/src/icons/css.svg", fallback: "💎", color: "#1572B6" },
-  { name: "Git", icon: "/src/icons/git.svg", fallback: "📝", color: "#F05032" },
-  { name: "MySQL", icon: "/src/icons/mysql.svg", fallback: "🗄️", color: "#4479A1" },
-  { name: "Python", icon: "/src/icons/py.svg", fallback: "🐍", color: "#3776AB" },
-  { name: "Astro", icon: "/src/icons/astro.svg", fallback: "🚀", color: "#FF5D01" }
+  { name: "React", icon: "/icons/react.svg", fallback: "⚛️", color: "#61DAFB" },
+  { name: "React Native", icon: "/icons/reactnative.svg", fallback: "📱", color: "#61DAFB" },
+  { name: "TypeScript", icon: "/icons/ts.svg", fallback: "🔷", color: "#3178C6" },
+  { name: "JavaScript", icon: "/icons/js.svg", fallback: "🟨", color: "#F7DF1E" },
+  { name: "Node.js", icon: "/icons/node.svg", fallback: "🟢", color: "#339933" },
+  { name: "Angular", icon: "/icons/angular.svg", fallback: "🔺", color: "#DD0031" },
+  { name: "HTML5", icon: "/icons/html.svg", fallback: "🌐", color: "#E34F26" },
+  { name: "CSS3", icon: "/icons/css.svg", fallback: "💎", color: "#1572B6" },
+  { name: "Git", icon: "/icons/git.svg", fallback: "📝", color: "#F05032" },
+  { name: "MySQL", icon: "/icons/mysql.svg", fallback: "🗄️", color: "#4479A1" },
+  { name: "Python", icon: "/icons/py.svg", fallback: "🐍", color: "#3776AB" },
+  { name: "Astro", icon: "/icons/astro.svg", fallback: "🚀", color: "#FF5D01" }
 ];
 ---
 
@@ -35,9 +35,8 @@ const items = [
           <div class="embla__slide flex-shrink-0">
             <div class="border border-cyan-400/20 rounded p-4 bg-black/50 hover:border-cyan-300/50 transition-all hover:bg-cyan-500/10 min-h-[120px]">
               <div class="flex flex-col items-center text-center space-y-3">
-                <div class="w-12 h-12 grid place-items-center border border-cyan-400/30 rounded-lg bg-cyan-500/10 relative">
-                  <img src={t.icon} alt={t.name} class="tech-icon" style={`color: ${t.color};`} width="28" height="28" />
-                  <span class="absolute text-lg fallback-icon" style="display: none;">{t.fallback}</span>
+                <div class="w-12 h-12 grid place-items-center border border-cyan-400/30 rounded-lg bg-cyan-500/10">
+                  <img src={t.icon} alt={t.name} class="tech-icon" width="28" height="28" />
                 </div>
                 <div class="font-mono">
                   <div class="text-cyan-400 font-medium text-sm">{t.name}</div>
@@ -157,46 +156,11 @@ const items = [
     console.log('Carousel infinito inicializado');
   }
 
-  // Verificar si los iconos se cargan correctamente
-  function checkIcons() {
-    const iconElements = document.querySelectorAll('.tech-icon');
-    console.log(`Verificando ${iconElements.length} iconos...`);
-    
-    iconElements.forEach((icon, index) => {
-      const htmlIcon = icon as HTMLImageElement;
-      const fallback = icon.parentElement?.querySelector('.fallback-icon') as HTMLElement;
-      
-      // Verificar si la imagen se cargó correctamente
-      setTimeout(() => {
-        const isLoaded = htmlIcon.complete && htmlIcon.naturalHeight !== 0;
-        const hasError = htmlIcon.naturalHeight === 0;
-        
-        console.log(`Icono ${index}: loaded=${isLoaded}, error=${hasError}`);
-        
-        if (hasError || !isLoaded) {
-          console.log(`Mostrando fallback para icono ${index}`);
-          if (fallback) {
-            htmlIcon.style.display = 'none';
-            fallback.style.display = 'block';
-          }
-        } else {
-          console.log(`Icono ${index} cargado correctamente`);
-        }
-      }, 500);
-    });
-  }
-
   // Inicializar cuando el DOM esté listo
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initSimpleCarousel();
-      checkIcons();
-    });
+    document.addEventListener('DOMContentLoaded', initSimpleCarousel);
   } else {
-    setTimeout(() => {
-      initSimpleCarousel();
-      checkIcons();
-    }, 500);
+    initSimpleCarousel();
   }
 </script>
 
@@ -290,21 +254,9 @@ const items = [
   filter: drop-shadow(0 0 4px rgba(6, 182, 212, 0.3));
 }
 
-.fallback-icon {
-  transition: all 0.3s ease;
-  font-size: 1.5rem;
-  display: none;
-}
-
-/* Ensure fallback icons are properly styled when shown */
-.fallback-icon[style*="block"] {
-  display: block !important;
-}
-
 /* Icon container styling */
 .embla__slide .w-12.h-12 {
   position: relative;
-  overflow: hidden;
 }
 
 /* Icon hover states */
